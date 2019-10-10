@@ -1,1 +1,1 @@
-# Python_Hackathon
+Pythonハッカソン@ヒーローズリーグで使用した Firebase と Watson LanguageTranslator, Watson PersonalityInsights, WatsonToneAnalyzer の使用テンプレート
