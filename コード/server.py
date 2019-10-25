@@ -35,11 +35,9 @@ db = firestore.client()
 
 @app.route('/LINE', methods=['POST'])
 def post_firebase_json():
-    json = request.get_json()  # POSTされたJSONを取得
-    print(jsonify(json))
-    return jsonify(json)
-    text = str(json['text'])
-    userID = str(json['userID'])
+    # json = request.get_json()  # POSTされたJSONを取得
+    text = request.form['text']
+    userID = request.form['userID']
   
     ran = random.randint(1, 100000)
     new_ref = db.collection('user').document(str(ran))
