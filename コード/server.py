@@ -36,8 +36,8 @@ db = firestore.client()
 @app.route('/LINE', methods=['POST'])
 def post_firebase_json():
     # json = request.get_json()  # POSTされたJSONを取得
-    text = request.form['text']
-    userID = request.form['userID']
+    text = str(request.form['text'])
+    userID = str(request.form['userID'])
   
     ran = random.randint(1, 100000)
     new_ref = db.collection('user').document(str(ran))
@@ -47,7 +47,7 @@ def post_firebase_json():
     }
     new_ref.set(new_data)
 
-    return jsonify(json)
+    # return jsonify(json)
 
     # 英語に翻訳
     translation = language_translator.translate(
@@ -100,11 +100,11 @@ def post_firebase_json():
 
 @app.route('/LINE_judge', methods=['POST'])
 def post_firebase_json_judge():
-    json = request.get_json()  # POSTされたJSONを取得
-    userID = str(json['userID'])
-    text = str(json['text'])
-    judge = str(json['judge'])
-    number = judge.split(',')
+    # json = request.get_json()  # POSTされたJSONを取得
+    text = str(request.form['text'])
+    userID = str(request.form['userID'])
+    # judge = str(json['judge'])
+    # number = judge.split(',')
     
     # firebase格納  
     ran = random.randint(1, 100000)
@@ -117,7 +117,7 @@ def post_firebase_json_judge():
 
     # firebaseから全ての内容を取り出し
     ref = db.collection('user')
-    docs = ref.get()
+    docs = ref.stream()
     data_all = ''
     for doc in docs:
         data = doc.to_dict()
